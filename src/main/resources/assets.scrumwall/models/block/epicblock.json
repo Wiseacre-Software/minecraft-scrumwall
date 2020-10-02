@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "scrumwall:block/epicblock",
+    "up": "scrumwall:block/epicblock",
+    "north": "scrumwall:block/epicblock_front",
+    "south": "scrumwall:block/epicblock",
+    "east": "scrumwall:block/epicblock",
+    "west": "scrumwall:block/epicblock"
+  }
+}

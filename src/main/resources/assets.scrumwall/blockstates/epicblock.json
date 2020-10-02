@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "scrumwall:block/epicblock",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "scrumwall:block/epicblock",
+      "x": -90
+    },
+    "facing=north": {
+      "model": "scrumwall:block/epicblock"
+    },
+    "facing=south": {
+      "model": "scrumwall:block/epicblock",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "scrumwall:block/epicblock",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "scrumwall:block/epicblock",
+      "y": 90
+    }
+  }
+}

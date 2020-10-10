@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "scrumwall:block/ruby_block" }
+  }
+}

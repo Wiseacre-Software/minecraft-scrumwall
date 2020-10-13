@@ -8,7 +8,7 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 
 modId="scrumwall" #mandatory
 
-version="1.15.2-1.0.0" #mandatory
+version="1.16.1-1.0.0" #mandatory
 
 displayName="ScrumWall" #mandatory
 

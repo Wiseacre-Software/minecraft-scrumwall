@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "scrumwall:blocks/oven_top",
+        "front": "scrumwall:blocks/oven_front",
+        "side": "scrumwall:blocks/oven_side"
+    }
+}

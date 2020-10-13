@@ -4,5 +4,6 @@
   "itemGroup.scrumTab": "Scrum",
   "item.scrumwall.ruby_sword": "Ruby Sword",
   "item.scrumwall.ruby_pickaxe": "Ruby Pickaxe",
-  "item.scrumwall.poison_apple": "Poison Apple"
+  "item.scrumwall.poison_apple": "Poison Apple",
+  "block.scrumwall.oven": "Oven"
 }

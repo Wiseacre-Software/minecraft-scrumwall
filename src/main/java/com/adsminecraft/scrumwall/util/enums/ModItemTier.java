@@ -1,6 +1,6 @@
-package com.adsminecraft.scrumwall.tools;
+package com.adsminecraft.scrumwall.util.enums;
 
-import com.adsminecraft.scrumwall.util.RegistryHandler;
+import com.adsminecraft.scrumwall.init.ModItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public enum ModItemTier implements IItemTier {
 
     RUBY(3, 800, 7.0F, 3.0F, 12, () -> {
-        return Ingredient.fromItems(RegistryHandler.RUBY.get());
+        return Ingredient.fromItems(ModItems.RUBY.get());
     });
 
     private final int harvestLevel;

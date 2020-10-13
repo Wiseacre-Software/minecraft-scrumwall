@@ -1,6 +1,7 @@
 package com.adsminecraft.scrumwall;
 
-import com.adsminecraft.scrumwall.util.RegistryHandler;
+import com.adsminecraft.scrumwall.init.ModBlocks;
+import com.adsminecraft.scrumwall.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,14 +15,15 @@ import org.apache.logging.log4j.Logger;
 @Mod("scrumwall")
 public class ScrumWall
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "scrumwall";
 
     public ScrumWall() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-        RegistryHandler.init();
+        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -39,7 +41,7 @@ public class ScrumWall
     public static final ItemGroup TAB = new ItemGroup("scrumTab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(RegistryHandler.RUBY.get());
+            return new ItemStack(ModItems.RUBY.get());
         }
     };
 }

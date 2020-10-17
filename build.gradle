@@ -20,7 +20,7 @@ archivesBaseName = 'ScrumWall-1.16.3'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 repositories {
-    maven { url 'http://dvs1.progwml6.com/files/maven/' }
+    maven { url 'http://dvs1.progwml6.com/files/maven/' } // JEI
     maven { url 'https://maven.blamejared.com' }
     maven { url 'https://maven.tehnut.info' }
 
@@ -87,12 +87,11 @@ minecraft {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.3-34.1.0'
 
-//    compile fg.deobf('ignored:Cucumber:1.16.3-4.1.2')
-//    compileOnly fg.deobf('mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2:api')
-//    runtimeOnly fg.deobf('mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2')
-//    compileOnly fg.deobf('mezz.jei:jei-1.16.3:7.6.0.49:api')
-//    runtimeOnly fg.deobf('mezz.jei:jei-1.16.3:7.6.0.49')
-//    compile fg.deobf('com.blamejared.crafttweaker:CraftTweaker-1.16.2:7.0.0.26')
+    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}:api")
+    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${crafttweaker_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

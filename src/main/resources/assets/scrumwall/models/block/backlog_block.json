@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "scrumwall:blocks/backlog_block"
+  }
+}

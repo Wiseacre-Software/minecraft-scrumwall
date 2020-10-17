@@ -1,0 +1,26 @@
+package com.adsminecraft.scrumwall.item;
+
+import com.adsminecraft.scrumwall.init.ModInit;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+public class BacklogItem extends Item {
+    
+    public BacklogItem() {
+        super(new Item.Properties()
+                .maxStackSize(1)
+                .group(ModInit.ITEM_GROUP));
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flags) {
+        list.add(new TranslationTextComponent("message.backlogitem"));
+    }
+}

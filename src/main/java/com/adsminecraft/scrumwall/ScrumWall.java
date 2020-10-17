@@ -21,10 +21,10 @@ public class ScrumWall {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG);
 
-        Registration.init();
-
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInit::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientInit::init);
+
+        Registration.init();
     }
 }

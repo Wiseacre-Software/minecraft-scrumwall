@@ -26,7 +26,7 @@ public class Registration {
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final RegistryObject<BacklogBlock> BACKLOGBLOCK = BLOCKS.register("backlogblock", BacklogBlock::new);
-    public static final RegistryObject<Item> BACKLOG_ITEM = ITEMS.register("backlogblock", () -> new BlockItem(BACKLOGBLOCK.get(), new Item.Properties().group(ModInit.ITEM_GROUP)));
+    public static final RegistryObject<BacklogBlock> BACKLOG_BLOCK = BLOCKS.register("backlog_block", BacklogBlock::new);
+    public static final RegistryObject<Item> BACKLOG_ITEM = ITEMS.register("backlog_block", () -> new BlockItem(BACKLOG_BLOCK.get(), new Item.Properties().group(ModInit.ITEM_GROUP)));
 //    public static final RegistryObject<TileEntityType<BacklogTile>> BACKLOG_TILE = TILES.register("backlogblock", () -> TileEntityType.Builder.create(BacklogTile::new, BACKLOGBLOCK.get()).build(null));
 }

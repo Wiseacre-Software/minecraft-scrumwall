@@ -10,10 +10,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 @Mod.EventBusSubscriber(modid = ScrumWall.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModInit {
 
-    public static final ItemGroup ITEM_GROUP = new ItemGroup("mytutorial") {
+    public static final ItemGroup ITEM_GROUP = new ItemGroup("scrumwallTab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(Registration.BACKLOGBLOCK.get());
+            return new ItemStack(Registration.BACKLOG_BLOCK.get());
         }
     };
 

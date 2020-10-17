@@ -10,7 +10,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0'
@@ -31,8 +31,6 @@ println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getPro
 minecraft {
     mappings channel: 'snapshot', version: '20200916-1.16.2'
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
     runs {
         client {
             workingDirectory project.file('run')
@@ -43,7 +41,11 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            ideaModule "${project.name}.main"
+            mods {
+                scrumwall {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
@@ -55,7 +57,11 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            ideaModule "${project.name}.main"
+            mods {
+                scrumwall {
+                    source sourceSets.main
+                }
+            }
         }
 
         data {
@@ -79,7 +85,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.1.23'
+    minecraft 'net.minecraftforge:forge:1.16.3-34.1.0'
 
 //    compile fg.deobf('ignored:Cucumber:1.16.3-4.1.2')
 //    compileOnly fg.deobf('mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2:api')
@@ -93,7 +99,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "ScrumWall",
+            "Specification-Title": "scrumwall",
             "Specification-Vendor": "adsminecraft",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

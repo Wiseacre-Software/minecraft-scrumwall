@@ -20,7 +20,14 @@ archivesBaseName = 'ScrumWall-1.16.3'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 repositories {
-    maven { url 'http://dvs1.progwml6.com/files/maven/' } // JEI
+    maven {
+        name = "Progwml6 maven"
+        url 'http://dvs1.progwml6.com/files/maven/'
+    } // JEI
+    maven {
+        name = "ModMaven"
+        url 'https://modmaven.k-4u.nl'
+    } // JEI fallback
     maven { url 'https://maven.blamejared.com' }
     maven { url 'https://maven.tehnut.info' }
 
@@ -91,7 +98,7 @@ dependencies {
     runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
-    compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${crafttweaker_version}")
+//    compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${crafttweaker_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

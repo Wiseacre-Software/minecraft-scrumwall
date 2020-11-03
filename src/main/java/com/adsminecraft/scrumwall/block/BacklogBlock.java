@@ -35,6 +35,7 @@ public class BacklogBlock extends Block {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new BacklogTile(); }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);

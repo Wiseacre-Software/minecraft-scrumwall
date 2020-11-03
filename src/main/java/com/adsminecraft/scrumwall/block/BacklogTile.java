@@ -1,5 +1,6 @@
 package com.adsminecraft.scrumwall.block;
 
+import com.adsminecraft.scrumwall.ScrumWall;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -8,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -20,7 +22,15 @@ import static com.adsminecraft.scrumwall.init.Registration.BACKLOG_TILE;
 
 public class BacklogTile extends TileEntity {
 
+    public enum ItemHandlers {
+        INPUT, OUTPUT, GRID, PREVIEW
+    };
+
     private ItemStackHandler itemHandler = createHandler();
+    private final LazyOptional<IItemHandler> input = LazyOptional.of(this::createIOHandler);
+    private final LazyOptional<IItemHandler> output = LazyOptional.of(this::createIOHandler);
+    private final LazyOptional<IItemHandler> grid = LazyOptional.of(this::createGridHandler);
+    private final LazyOptional<IItemHandler> preview = LazyOptional.of(this::createPreviewHandler);
     private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     private int counter;
 
@@ -73,11 +83,40 @@ public class BacklogTile extends TileEntity {
         };
     }
 
+    private IItemHandler createIOHandler() {
+        return new ItemStackHandler(1); //IO_SIZE
+    }
+
+    private IItemHandler createGridHandler() {
+        return new ItemStackHandler(9); //GRID_SIZE
+    }
+
+    private IItemHandler createPreviewHandler() {
+        return new ItemStackHandler(1);
+    }
+
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return handler.cast();
         }
         return super.getCapability(cap, side);
+    }
+
+    @Nullable
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull ItemHandlers type) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            switch (type) {
+                case INPUT:
+                    return input.cast();
+                case OUTPUT:
+                    return output.cast();
+                case GRID:
+                    return grid.cast();
+                case PREVIEW:
+                    return preview.cast();
+            }
+        }
+        return null;
     }
 }

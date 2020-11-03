@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class ScrumWall {
     public static final String MODID = "scrumwall";
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public ScrumWall() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);

@@ -1,38 +1,59 @@
 package com.adsminecraft.scrumwall.block;
 
 import com.adsminecraft.scrumwall.init.Registration;
+import com.adsminecraft.scrumwall.util.CraftingSlotItemHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import static com.adsminecraft.scrumwall.ScrumWall.LOGGER;
+
 public class BacklogContainer extends Container {
 
-    private TileEntity tileEntity;
+    private BacklogTile tileEntity;
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
 
     public BacklogContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(Registration.BACKLOG_CONTAINER.get(), windowId);
-        tileEntity = world.getTileEntity(pos);
+        LOGGER.info("BacklogContainer - entering");
+        tileEntity = (BacklogTile) world.getTileEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
-        if (tileEntity != null) {
-            tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 64, 24));
-            });
-        }
+        if (tileEntity == null) { return; }
+
+        // input slot
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, BacklogTile.ItemHandlers.INPUT).ifPresent(h -> {
+            this.addSlot(new SlotItemHandler(h, 0, 10, 7));
+        });
+
+        // grid
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, BacklogTile.ItemHandlers.GRID).ifPresent(h -> {
+            int index = 0;
+            for (int rowPos = 0; rowPos < 3; rowPos++) {
+                for (int colPos = 0; colPos < 3; colPos++) {
+                    this.addSlot(new CraftingSlotItemHandler(h, index,
+                            46 + colPos * 18,
+                            7 + rowPos * 18));
+                    index++;
+                }
+            }
+        });
+
+        // player inventory
         layoutPlayerInventorySlots(10, 70);
     }
 
@@ -44,7 +65,8 @@ public class BacklogContainer extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
+        LOGGER.info("transferStackInSlot - entering");
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
@@ -79,7 +101,7 @@ public class BacklogContainer extends Container {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, stack);
+            slot.onTake(player, stack);
         }
 
         return itemstack;
